@@ -29,25 +29,35 @@ func getCommands() map[string]cliCommand {
 }
 
 func commandHelp() error {
-	fmt.Println("Helping...")
+	fmt.Print("\nAvailable PokeDex commands:\n\n")
+	for _, cmd := range getCommands() {
+		fmt.Printf(" - Name: %v\n", cmd.name)
+		fmt.Printf(" - Description: %v\n", cmd.description)
+		fmt.Println()
+	}
+	fmt.Println()
 	return nil
 }
 
 func commandExit() error {
 	fmt.Println("Exiting...")
+	os.Exit(0)
 	return nil
 }
 
 func startRepl() {
-	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Print("PokeDex > ")
-	scanner.Scan()
-	cmd, ok := getCommands()[scanner.Text()]
-	if !ok {
-		fmt.Println("Invalid command.")
-		return
+	for {
+		scanner := bufio.NewScanner(os.Stdin)
+		fmt.Print("PokeDex > ")
+		scanner.Scan()
+		cleanedInput := cleanInput(scanner.Text())
+		cmd, ok := getCommands()[cleanedInput[0]]
+		if !ok {
+			fmt.Println("Invalid command.")
+			continue
+		}
+		cmd.callback()
 	}
-	cmd.callback()
 }
 
 func cleanInput(str string) []string {

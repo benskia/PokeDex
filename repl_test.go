@@ -14,6 +14,13 @@ func TestCleanInput(t *testing.T) {
 				"world",
 			},
 		},
+		{
+			input: "HELLO world",
+			expected: []string{
+				"hello",
+				"world",
+			},
+		},
 	}
 
 	for _, cs := range cases {
@@ -29,7 +36,6 @@ func TestCleanInput(t *testing.T) {
 			expectedWord := cs.expected[i]
 			if actualWord != expectedWord {
 				t.Errorf("Unequal words: %v, %v", actualWord, expectedWord)
-				continue
 			}
 		}
 	}
