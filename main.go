@@ -38,6 +38,8 @@ func commandExit() error {
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		fmt.Print("pokedex >")
+		fmt.Print("pokedex > ")
+		scanner.Scan()
+		fmt.Println(scanner.Text())
 	}
 }
