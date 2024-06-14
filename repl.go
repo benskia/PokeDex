@@ -25,6 +25,16 @@ func getCommands() map[string]cliCommand {
 			description: "Exit the Pokedex",
 			callback:    commandExit,
 		},
+		"map": {
+			name:        "map",
+			description: "Display all Pokemon location names.",
+			callback:    commandMap,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Display the previous Pokemon locations.",
+			callback:    commandMapb,
+		},
 	}
 }
 
@@ -42,6 +52,14 @@ func commandHelp() error {
 func commandExit() error {
 	fmt.Println("Exiting...")
 	os.Exit(0)
+	return nil
+}
+
+func commandMap() error {
+	return nil
+}
+
+func commandMapb() error {
 	return nil
 }
 
