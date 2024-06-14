@@ -12,7 +12,7 @@ type cliCommand struct {
 	callback    func() error
 }
 
-func (cmd cliCommand) getCommandMap() map[string]cliCommand {
+func getCommandMap() map[string]cliCommand {
 	return map[string]cliCommand{
 		"help": {
 			name:        "help",
@@ -28,18 +28,25 @@ func (cmd cliCommand) getCommandMap() map[string]cliCommand {
 }
 
 func commandHelp() error {
+	fmt.Println("Help executed...")
 	return nil
 }
 
 func commandExit() error {
+	fmt.Println("Exit executed...")
 	return nil
 }
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		fmt.Print("pokedex > ")
+		fmt.Print("PokeDex > ")
 		scanner.Scan()
-		fmt.Println(scanner.Text())
+		cmd, ok := getCommandMap()[scanner.Text()]
+		if !ok {
+			fmt.Println("Invalid command.")
+			continue
+		}
+		cmd.callback()
 	}
 }
