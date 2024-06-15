@@ -1,11 +1,12 @@
-package main
+package core
 
 import (
-	"./internal/pokeapi"
 	"bufio"
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/benskia/PokeDex/internal/commands"
 )
 
 func cleanInput(str string) []string {
@@ -17,7 +18,7 @@ func cleanInput(str string) []string {
 	return words
 }
 
-func startRepl() {
+func StartRepl() {
 	fmt.Print("\nWelcome to the PokeDex!\n\n")
 	for {
 		scanner := bufio.NewScanner(os.Stdin)
@@ -27,14 +28,14 @@ func startRepl() {
 		if cleanedInput == nil {
 			continue
 		}
-		cmd, ok := getCommands()[cleanedInput[0]]
+		cmd, ok := commands.GetCommands()[cleanedInput[0]]
 		if !ok {
 			fmt.Println("Invalid command. Try 'help' for a list of commands.")
 			continue
 		}
-		err := cmd.callback()
+		err := cmd.Callback()
 		if err != nil {
-			fmt.Printf("Error executing command %v : %v", cmd.name, err)
+			fmt.Printf("Error executing command %v : %v", cmd.Name, err)
 		}
 	}
 }

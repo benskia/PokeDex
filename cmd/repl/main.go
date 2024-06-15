@@ -1,7 +1,7 @@
 package main
 
-import "PokeDex/internal/core"
+import "github.com/benskia/PokeDex/internal/core"
 
 func main() {
-	startRepl()
+	core.StartRepl()
 }
