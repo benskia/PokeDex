@@ -12,6 +12,15 @@ type Config struct {
 	Prev *string
 }
 
+func NewConfig() Config {
+	next := new(string)
+	*next = "https://pokeapi.co/api/v2/location-area"
+	return Config{
+		Next: next,
+		Prev: nil,
+	}
+}
+
 type CliCommand struct {
 	Name        string
 	Description string

@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -33,15 +34,12 @@ type LocationAreaResponse struct {
 }
 
 func RequestLocationAreas(url *string) (*LocationAreaResponse, error) {
-	locationAreaEndpoint := new(string)
-	if url != nil {
-		locationAreaEndpoint = url
-	} else {
-		*locationAreaEndpoint = endpoint + "/location-area"
+	if url == nil {
+		return nil, errors.New("Tried to query with a null endpoint value.")
 	}
 
 	client := NewClient()
-	response, err := client.httpClient.Get(*locationAreaEndpoint)
+	response, err := client.httpClient.Get(*url)
 	if err != nil {
 		fmt.Println("Error making GET request.")
 		return nil, err

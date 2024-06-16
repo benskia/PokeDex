@@ -20,7 +20,7 @@ func cleanInput(str string) []string {
 
 func StartRepl() {
 	fmt.Print("\nWelcome to the PokeDex!\n\n")
-	cache := commands.Config{}
+	cache := commands.NewConfig()
 	for {
 		scanner := bufio.NewScanner(os.Stdin)
 		fmt.Print("PokeDex > ")
