@@ -32,9 +32,10 @@ type LocationAreaResponse struct {
 	} `json:"results"`
 }
 
-func RequestLocationAreas(url string) (*LocationAreaResponse, error) {
+func RequestLocationAreas() (*LocationAreaResponse, error) {
 	client := NewClient()
-	response, err := client.httpClient.Get(url)
+
+	response, err := client.httpClient.Get(endpoint + "/location-area")
 	if err != nil {
 		fmt.Println("Error making GET request.")
 		return nil, err

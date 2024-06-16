@@ -15,7 +15,7 @@ type Config struct {
 type CliCommand struct {
 	Name        string
 	Description string
-	Callback    func() error
+	Callback    func(config *Config) error
 }
 
 func GetCommands() map[string]CliCommand {
@@ -60,12 +60,15 @@ func commandExit(config *Config) error {
 }
 
 func commandMap(config *Config) error {
-	fmt.Println("Getting list of locations...")
-
-	locations, err := api.RequestLocationAreas("")
+	fmt.Println("Querying next list of locations...")
+	locations, err := api.RequestLocationAreas()
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	fmt.Println("Caching Next and Prev endpoints...")
+	config.Next = locations.Next
+	config.Prev = locations.Prev
 
 	if len(locations.Results) == 0 {
 		fmt.Println("No location data received.")
