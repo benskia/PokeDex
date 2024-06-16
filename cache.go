@@ -7,7 +7,7 @@ import (
 
 type Cache struct {
 	Entries map[string]cacheEntry
-	mut     sync.Mutex
+	mu      sync.Mutex
 }
 
 type cacheEntry struct {
@@ -15,8 +15,10 @@ type cacheEntry struct {
 	val       []byte
 }
 
-func NewCache(interval time.Time) Cache {
-	return Cache{}
+func NewCache(interval time.Time) *Cache {
+	return &Cache{
+		Entries: make(map[string]cacheEntry),
+	}
 }
 
 func (c *Cache) Add(key string, val []byte) {
@@ -25,4 +27,8 @@ func (c *Cache) Add(key string, val []byte) {
 
 func (c *Cache) Get(key string, val []byte, found bool) cacheEntry {
 	return cacheEntry{}
+}
+
+func (c *Cache) reapLoop() {
+	return
 }
