@@ -7,7 +7,7 @@ import (
 
 type Cache struct {
 	entries  map[string]cacheEntry
-	mu       sync.Mutex
+	mu       sync.RWMutex
 	interval time.Duration
 }
 
@@ -21,19 +21,23 @@ func NewCache(interval time.Duration) *Cache {
 		entries:  make(map[string]cacheEntry),
 		interval: interval,
 	}
-	cache.reapLoop()
+	go cache.reapLoop()
 	return &cache
 }
 
 func (c *Cache) Add(key string, val []byte) {
+	c.mu.Lock()
 	c.entries[key] = cacheEntry{
 		createdAt: time.Now(),
 		val:       val,
 	}
+	c.mu.Unlock()
 }
 
 func (c *Cache) Get(key string) ([]byte, bool) {
+	c.mu.RLock()
 	ce, ok := c.entries[key]
+	c.mu.RUnlock()
 	if !ok {
 		return nil, false
 	}
