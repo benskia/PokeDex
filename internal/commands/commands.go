@@ -60,10 +60,15 @@ func commandExit(config *Config) error {
 }
 
 func commandMap(config *Config) error {
+	if config.Next == nil {
+		fmt.Println("Already at the last page of locations.")
+		return nil
+	}
 	fmt.Println("Querying next list of locations...")
-	locations, err := api.RequestLocationAreas()
+	locations, err := api.RequestLocationAreas(config.Next)
 	if err != nil {
 		fmt.Println(err)
+		return err
 	}
 
 	fmt.Println("Caching Next and Prev endpoints...")
@@ -75,11 +80,34 @@ func commandMap(config *Config) error {
 		return nil
 	}
 	for _, location := range locations.Results {
-		fmt.Printf("Name: %v\tURL: %v\n", location.Name, location.URL)
+		fmt.Printf("Name: %v\t\tURL: %v\n", location.Name, location.URL)
 	}
 	return nil
 }
 
 func commandMapb(config *Config) error {
+	if config.Prev == nil {
+		fmt.Println("Already at the first page of locations.")
+		return nil
+	}
+
+	fmt.Println("Querying previous list of locations...")
+	locations, err := api.RequestLocationAreas(config.Prev)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	fmt.Println("Caching Next and Prev endpoints...")
+	config.Next = locations.Next
+	config.Prev = locations.Prev
+
+	if len(locations.Results) == 0 {
+		fmt.Println("No location data received.")
+		return nil
+	}
+	for _, location := range locations.Results {
+		fmt.Printf("Name: %v\t\tURL: %v\n", location.Name, location.URL)
+	}
 	return nil
 }

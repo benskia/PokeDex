@@ -20,6 +20,7 @@ func cleanInput(str string) []string {
 
 func StartRepl() {
 	fmt.Print("\nWelcome to the PokeDex!\n\n")
+	cache := commands.Config{}
 	for {
 		scanner := bufio.NewScanner(os.Stdin)
 		fmt.Print("PokeDex > ")
@@ -35,7 +36,7 @@ func StartRepl() {
 			continue
 		}
 
-		err := cmd.Callback()
+		err := cmd.Callback(&cache)
 		if err != nil {
 			fmt.Printf("Error executing command %v : %v", cmd.Name, err)
 		}
