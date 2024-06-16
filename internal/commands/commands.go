@@ -59,12 +59,10 @@ func commandExit(config *Config) error {
 	return nil
 }
 
-const endpoint string = "https://pokeapi.co/api/v2/location-area/"
-
 func commandMap(config *Config) error {
 	fmt.Println("Getting list of locations...")
 
-	locations, err := api.FetchLocations(endpoint)
+	locations, err := api.RequestLocationAreas("")
 	if err != nil {
 		fmt.Println(err)
 	}

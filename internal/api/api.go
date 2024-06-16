@@ -5,9 +5,24 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 )
 
-type ApiResponse struct {
+const endpoint string = "https://pokeapi.co/api/v2"
+
+type Client struct {
+	httpClient http.Client
+}
+
+func NewClient() Client {
+	return Client{
+		httpClient: http.Client{
+			Timeout: time.Minute,
+		},
+	}
+}
+
+type LocationAreaResponse struct {
 	Count   int     `json:"count"`
 	Next    *string `json:"next"`
 	Prev    *string `json:"previous"`
@@ -17,8 +32,9 @@ type ApiResponse struct {
 	} `json:"results"`
 }
 
-func FetchLocations(url string) (*ApiResponse, error) {
-	response, err := http.Get(url)
+func RequestLocationAreas(url string) (*LocationAreaResponse, error) {
+	client := NewClient()
+	response, err := client.httpClient.Get(url)
 	if err != nil {
 		fmt.Println("Error making GET request.")
 		return nil, err
@@ -31,7 +47,7 @@ func FetchLocations(url string) (*ApiResponse, error) {
 		return nil, err
 	}
 
-	locations := ApiResponse{}
+	locations := LocationAreaResponse{}
 	err = json.Unmarshal(body, &locations)
 	if err != nil {
 		fmt.Println("Error unmarshalling JSON to Struct.")
