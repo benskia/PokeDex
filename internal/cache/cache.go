@@ -17,14 +17,19 @@ type cacheEntry struct {
 }
 
 func NewCache(interval time.Duration) *Cache {
-	return &Cache{
+	cache := Cache{
 		cache:    make(map[string]cacheEntry),
 		interval: interval,
 	}
+	cache.reapLoop()
+	return &cache
 }
 
 func (c *Cache) Add(key string, val []byte) {
-	return
+	c.cache[key] = cacheEntry{
+		createdAt: time.Now(),
+		val:       val,
+	}
 }
 
 func (c *Cache) Get(key string, val []byte, found bool) cacheEntry {
