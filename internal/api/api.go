@@ -7,21 +7,14 @@ import (
 	"net/http"
 )
 
-type Location struct {
-	Name string `json:"name"`
-	URL  string `json:"url"`
-}
-
 type ApiResponse struct {
-	Count   int        `json:"count"`
-	Next    *string    `json:"next"`
-	Prev    *string    `json:"previous"`
-	Results []Location `json:"results"`
-}
-
-type Config struct {
-	Next *string
-	Prev *string
+	Count   int     `json:"count"`
+	Next    *string `json:"next"`
+	Prev    *string `json:"previous"`
+	Results []struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"results"`
 }
 
 func FetchLocations(url string) (*ApiResponse, error) {

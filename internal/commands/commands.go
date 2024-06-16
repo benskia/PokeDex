@@ -7,6 +7,11 @@ import (
 	"github.com/benskia/PokeDex/internal/api"
 )
 
+type Config struct {
+	Next *string
+	Prev *string
+}
+
 type CliCommand struct {
 	Name        string
 	Description string
@@ -38,7 +43,7 @@ func GetCommands() map[string]CliCommand {
 	}
 }
 
-func commandHelp() error {
+func commandHelp(config *Config) error {
 	fmt.Print("\nAvailable commands:\n\n")
 	for _, cmd := range GetCommands() {
 		fmt.Printf(" - Name: %v\n", cmd.Name)
@@ -48,7 +53,7 @@ func commandHelp() error {
 	return nil
 }
 
-func commandExit() error {
+func commandExit(config *Config) error {
 	fmt.Println("Shutting down PokeDex...")
 	os.Exit(0)
 	return nil
@@ -56,7 +61,7 @@ func commandExit() error {
 
 const endpoint string = "https://pokeapi.co/api/v2/location-area/"
 
-func commandMap() error {
+func commandMap(config *Config) error {
 	fmt.Println("Getting list of locations...")
 
 	locations, err := api.FetchLocations(endpoint)
@@ -74,6 +79,6 @@ func commandMap() error {
 	return nil
 }
 
-func commandMapb() error {
+func commandMapb(config *Config) error {
 	return nil
 }

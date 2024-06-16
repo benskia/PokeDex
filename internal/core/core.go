@@ -28,11 +28,13 @@ func StartRepl() {
 		if cleanedInput == nil {
 			continue
 		}
+
 		cmd, ok := commands.GetCommands()[cleanedInput[0]]
 		if !ok {
 			fmt.Println("Invalid command. Try 'help' for a list of commands.")
 			continue
 		}
+
 		err := cmd.Callback()
 		if err != nil {
 			fmt.Printf("Error executing command %v : %v", cmd.Name, err)
