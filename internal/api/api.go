@@ -75,5 +75,7 @@ func getByteData(key string, c *cache.Cache) ([]byte, error) {
 		return nil, err
 	}
 
+	c.Add(key, body)
+
 	return body, nil
 }

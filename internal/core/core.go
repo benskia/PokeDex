@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
+	"github.com/benskia/PokeDex/internal/cache"
 	"github.com/benskia/PokeDex/internal/commands"
 )
 
@@ -21,6 +23,7 @@ func cleanInput(str string) []string {
 func StartRepl() {
 	fmt.Print("\nWelcome to the PokeDex!\n\n")
 	config := commands.NewConfig()
+	cache := cache.NewCache(time.Minute * 5)
 	for {
 		scanner := bufio.NewScanner(os.Stdin)
 		fmt.Print("PokeDex > ")
@@ -36,7 +39,7 @@ func StartRepl() {
 			continue
 		}
 
-		err := cmd.Callback(&config)
+		err := cmd.Callback(&config, &cache)
 		if err != nil {
 			fmt.Printf("Error executing command %v : %v", cmd.Name, err)
 		}

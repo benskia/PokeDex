@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/benskia/PokeDex/internal/api"
+	"github.com/benskia/PokeDex/internal/cache"
 )
 
 type Config struct {
@@ -24,7 +25,7 @@ func NewConfig() Config {
 type CliCommand struct {
 	Name        string
 	Description string
-	Callback    func(config *Config) error
+	Callback    func(*Config, *cache.Cache) error
 }
 
 func GetCommands() map[string]CliCommand {
@@ -52,7 +53,7 @@ func GetCommands() map[string]CliCommand {
 	}
 }
 
-func commandHelp(config *Config) error {
+func commandHelp(config *Config, cache *cache.Cache) error {
 	fmt.Print("\nAvailable commands:\n\n")
 	for _, cmd := range GetCommands() {
 		fmt.Printf(" - Name: %v\n", cmd.Name)
@@ -62,19 +63,19 @@ func commandHelp(config *Config) error {
 	return nil
 }
 
-func commandExit(config *Config) error {
+func commandExit(config *Config, cache *cache.Cache) error {
 	fmt.Println("Shutting down PokeDex...")
 	os.Exit(0)
 	return nil
 }
 
-func commandMap(config *Config) error {
+func commandMap(config *Config, cache *cache.Cache) error {
 	if config.Next == nil {
 		fmt.Println("Already at the last page of locations.")
 		return nil
 	}
 	fmt.Println("Querying next list of locations...")
-	locations, err := api.RequestLocationAreas(config.Next)
+	locations, err := api.RequestLocationAreas(config.Next, cache)
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -94,14 +95,14 @@ func commandMap(config *Config) error {
 	return nil
 }
 
-func commandMapb(config *Config) error {
+func commandMapb(config *Config, cache *cache.Cache) error {
 	if config.Prev == nil {
 		fmt.Println("Already at the first page of locations.")
 		return nil
 	}
 
 	fmt.Println("Querying previous list of locations...")
-	locations, err := api.RequestLocationAreas(config.Prev)
+	locations, err := api.RequestLocationAreas(config.Prev, cache)
 	if err != nil {
 		fmt.Println(err)
 		return err
