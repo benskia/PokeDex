@@ -10,7 +10,7 @@ Place and run the 'pokedex' executable (also within './cmd/pokedex/') wherever y
 
 ## Commands
 
-* help           : Displays a list of available commands.
+* help : Displays a list of available commands.
 ```
 ❯ cd cmd/pokedex
 ❯ go build && ./pokedex
@@ -47,13 +47,13 @@ Available commands:
 
 PokeDex >
 ```
-* exit           : Ends the program.
+* exit : Ends the program.
 ```
 PokeDex > exit
 Shutting down PokeDex...
 ```
-* map            : Displays the next 20 locations.
-* mapb           : Displays the previous 20 locations.
+* map : Displays the next 20 locations.
+* mapb : Displays the previous 20 locations.
 ```
 PokeDex >  map
 
@@ -80,7 +80,7 @@ mt-coronet-1f-from-exterior
 
 PokeDex >
 ```
-* explore <area> : Displays the Pokemon that can be encountered at <area>.
+* explore area-name : Displays the Pokemon that can be encountered at area-name.
 ```
 
 PokeDex > explore canalave-city-area
@@ -99,7 +99,7 @@ lumineon
 
 PokeDex >
 ```
-* catch <name>   : Attempts to catch the Pokemon, by <name>.
+* catch pokemon-name: Attempts to catch the Pokemon, by pokemon-name.
 ```
 PokeDex > catch tentacool
 
@@ -109,7 +109,7 @@ Failed to capture tentacool!
 
 PokeDex >
 ```
-* inspect <name> : Displays details about the Pokemon, by <name>.
+* inspect pokemon-name : Displays details about the Pokemon, by pokemon-name.
 ```
 PokeDex > inspect rattata
 
@@ -128,7 +128,7 @@ Types:
 
 PokeDex >
 ```
-* pokedex        : Displays a list of all Pokemon caught so far.
+* pokedex : Displays a list of all Pokemon caught so far.
 ```
 PokeDex > pokedex
 
