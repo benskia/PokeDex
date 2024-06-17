@@ -12,7 +12,7 @@ type Config struct {
 
 func NewConfig() Config {
 	next := new(string)
-	*next = api.Endpoint + "?offset=0&limit=20"
+	*next = api.LocationAreaEndpoint + "?offset=0&limit=20"
 	return Config{
 		Next: next,
 		Prev: nil,
@@ -51,6 +51,11 @@ func GetCommands() map[string]CliCommand {
 			Name:        "explore",
 			Description: "Display which Pokemon can be found at a location.",
 			Callback:    commandExplore,
+		},
+		"catch": {
+			Name:        "catch",
+			Description: "Attempt to catch a Pokemon, by name.",
+			Callback:    commandCatch,
 		},
 	}
 }

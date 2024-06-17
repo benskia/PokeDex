@@ -9,7 +9,7 @@ import (
 	"github.com/benskia/PokeDex/internal/cache"
 )
 
-const Endpoint string = "https://pokeapi.co/api/v2/location-area"
+const LocationAreaEndpoint string = "https://pokeapi.co/api/v2/location-area"
 
 type Client struct {
 	httpClient http.Client

@@ -6,7 +6,7 @@ import (
 	"github.com/benskia/PokeDex/internal/cache"
 )
 
-func commandHelp(config *Config, cache *cache.Cache, area string) error {
+func commandHelp(_ *Config, _ *cache.Cache, _ string) error {
 	fmt.Print("\nAvailable commands:\n\n")
 	for _, cmd := range GetCommands() {
 		fmt.Printf(" - Name: %v\n", cmd.Name)

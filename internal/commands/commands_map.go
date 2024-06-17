@@ -7,7 +7,7 @@ import (
 	"github.com/benskia/PokeDex/internal/cache"
 )
 
-func commandMap(config *Config, cache *cache.Cache, area string) error {
+func commandMap(config *Config, cache *cache.Cache, _ string) error {
 	if config.Next == nil {
 		fmt.Println("Already at the last page of locations.")
 		return nil

@@ -7,7 +7,7 @@ import (
 	"github.com/benskia/PokeDex/internal/cache"
 )
 
-func commandMapb(config *Config, cache *cache.Cache, area string) error {
+func commandMapb(config *Config, cache *cache.Cache, _ string) error {
 	if config.Prev == nil {
 		fmt.Println("Already at the first page of locations.")
 		return nil

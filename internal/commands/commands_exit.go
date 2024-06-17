@@ -7,7 +7,7 @@ import (
 	"github.com/benskia/PokeDex/internal/cache"
 )
 
-func commandExit(config *Config, cache *cache.Cache, area string) error {
+func commandExit(_ *Config, _ *cache.Cache, _ string) error {
 	fmt.Println("Shutting down PokeDex...")
 	os.Exit(0)
 	return nil

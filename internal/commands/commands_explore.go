@@ -7,13 +7,13 @@ import (
 	"github.com/benskia/PokeDex/internal/cache"
 )
 
-func commandExplore(config *Config, cache *cache.Cache, area string) error {
+func commandExplore(_ *Config, cache *cache.Cache, area string) error {
 	if area == "" {
 		fmt.Println("Need an area name to explore (explore canalave-city-area).")
 		return nil
 	}
 	endpoint := new(string)
-	*endpoint = api.Endpoint + "/" + area
+	*endpoint = api.LocationAreaEndpoint + "/" + area
 	locationArea, err := api.RequestAreaDetails(endpoint, cache)
 	if err != nil {
 		fmt.Println(err)
