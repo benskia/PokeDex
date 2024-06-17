@@ -91,7 +91,7 @@ func commandMap(config *Config, cache *cache.Cache) error {
 
 	fmt.Println()
 	for _, location := range locations.Results {
-		fmt.Printf("Name: %v\t\tURL: %v\n", location.Name, location.URL)
+		fmt.Printf("Name: %v\t\t\t\tURL: %v\n", location.Name, location.URL)
 	}
 	fmt.Println()
 
@@ -121,7 +121,7 @@ func commandMapb(config *Config, cache *cache.Cache) error {
 
 	fmt.Println()
 	for _, location := range locations.Results {
-		fmt.Printf("Name: %v\t\tURL: %v\n", location.Name, location.URL)
+		fmt.Printf("Name: %v\t\t\t\tURL: %v\n", location.Name, location.URL)
 	}
 	fmt.Println()
 
