@@ -26,6 +26,10 @@ func NewClient() Client {
 	}
 }
 
+type apiResponse interface {
+	FetchJSON()
+}
+
 func getByteData(key string, c *cache.Cache) ([]byte, error) {
 	entry, ok := c.Get(key)
 	if ok {
