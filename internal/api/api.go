@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	LocationAreaEndpoint   string = "https://pokeapi.co/api/v2/location-area/"
-	PokemonSpeciesEndpoint string = "https://pokeapi.co/api/v2/pokemon-species/"
+	LocationAreaEndpoint string = "https://pokeapi.co/api/v2/location-area/"
+	PokemonEndpoint      string = "https://pokeapi.co/api/v2/pokemon/"
 )
 
 type Client struct {

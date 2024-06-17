@@ -24,8 +24,8 @@ type Pokemon struct {
 func (p Pokemon) PrintDetails() {
 	fmt.Println()
 	fmt.Printf("Name: %v\n", p.Name)
-	fmt.Printf("Height: %v\n", p.Height)
-	fmt.Printf("Weight: %v\n", p.Weight)
+	fmt.Printf("Height: %v decimeters\n", p.Height)
+	fmt.Printf("Weight: %v hectograms\n", p.Weight)
 	fmt.Print("Stats:\n")
 	fmt.Printf("\t-hp: %v\n", p.Stats.HP)
 	fmt.Printf("\t-attack: %v\n", p.Stats.Attack)
