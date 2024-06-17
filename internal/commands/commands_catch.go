@@ -13,11 +13,11 @@ const maxCatchRate int = 255
 
 func commandCatch(_ *Config, cache *cache.Cache, pokemon string, pokedex *dex.Pokedex) error {
 	if pokemon == "" {
-		fmt.Println("Need a Pokemon name to try catching it.")
+		fmt.Print("\nNeed a Pokemon name to try catching it.\n\n")
 		return nil
 	}
 	if _, ok := pokedex.Dex[pokemon]; ok {
-		fmt.Printf("%v has already been captured and recorded in your Pokedex.\n", pokemon)
+		fmt.Printf("\n%v has already been captured and recorded in your Pokedex.\n\n", pokemon)
 		return nil
 	}
 	endpoint := new(string)
@@ -27,10 +27,10 @@ func commandCatch(_ *Config, cache *cache.Cache, pokemon string, pokedex *dex.Po
 		return err
 	}
 	if rand.Intn(maxCatchRate) <= pokemonDetails.CaptureRate {
-		fmt.Printf("Captured %v!\n", pokemon)
+		fmt.Printf("\nCaptured %v!\n\n", pokemon)
 		pokedex.Dex[pokemon] = dex.Pokemon{Name: pokemonDetails.Name}
 	} else {
-		fmt.Printf("Failed to capture %v!\n", pokemon)
+		fmt.Printf("\nFailed to capture %v!\n\n", pokemon)
 	}
 	return nil
 }

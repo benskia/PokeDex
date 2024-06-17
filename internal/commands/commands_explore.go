@@ -10,7 +10,7 @@ import (
 
 func commandExplore(_ *Config, cache *cache.Cache, area string, _ *dex.Pokedex) error {
 	if area == "" {
-		fmt.Println("Need an area name to explore (explore canalave-city-area).")
+		fmt.Print("\nNeed an area name to explore (explore canalave-city-area).\n\n")
 		return nil
 	}
 	endpoint := new(string)
@@ -20,7 +20,7 @@ func commandExplore(_ *Config, cache *cache.Cache, area string, _ *dex.Pokedex) 
 		return err
 	}
 	if len(locationArea.PokemonEncounters) == 0 {
-		fmt.Printf("Found no Pokemon encounters in %v.\n", area)
+		fmt.Printf("\nFound no Pokemon encounters in %v.\n\n", area)
 		return nil
 	}
 	fmt.Println()
