@@ -6,13 +6,18 @@ import (
 
 	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
+	"github.com/benskia/PokeDex/internal/dex"
 )
 
 const maxCatchRate int = 255
 
-func commandCatch(_ *Config, cache *cache.Cache, pokemon string) error {
+func commandCatch(_ *Config, cache *cache.Cache, pokemon string, pokedex *dex.Pokedex) error {
 	if pokemon == "" {
 		fmt.Println("Need a Pokemon name to try catching it.")
+		return nil
+	}
+	if _, ok := pokedex.Dex[pokemon]; ok {
+		fmt.Printf("%v has already been captured and recorded in your Pokedex.\n", pokemon)
 		return nil
 	}
 	endpoint := new(string)
@@ -22,9 +27,10 @@ func commandCatch(_ *Config, cache *cache.Cache, pokemon string) error {
 		return err
 	}
 	if rand.Intn(maxCatchRate) <= pokemonDetails.CaptureRate {
-		fmt.Println("Captured!")
+		fmt.Printf("Captured %v!\n", pokemon)
+		pokedex.Dex[pokemon] = dex.Pokemon{Name: pokemonDetails.Name}
 	} else {
-		fmt.Println("Failed capture!")
+		fmt.Printf("Failed to capture %v!\n", pokemon)
 	}
 	return nil
 }

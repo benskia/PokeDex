@@ -1,7 +1,7 @@
-package pokedex
+package dex
 
 type Pokedex struct {
-	dex map[string]Pokemon
+	Dex map[string]Pokemon
 }
 
 type Pokemon struct {
@@ -10,6 +10,6 @@ type Pokemon struct {
 
 func NewPokedex() *Pokedex {
 	return &Pokedex{
-		dex: make(map[string]Pokemon),
+		Dex: make(map[string]Pokemon),
 	}
 }

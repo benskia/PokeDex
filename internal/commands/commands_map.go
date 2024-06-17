@@ -5,9 +5,10 @@ import (
 
 	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
+	"github.com/benskia/PokeDex/internal/dex"
 )
 
-func commandMap(config *Config, cache *cache.Cache, _ string) error {
+func commandMap(config *Config, cache *cache.Cache, _ string, _ *dex.Pokedex) error {
 	if config.Next == nil {
 		fmt.Println("Already at the last page of locations.")
 		return nil

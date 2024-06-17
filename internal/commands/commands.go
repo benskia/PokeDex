@@ -3,6 +3,7 @@ package commands
 import (
 	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
+	"github.com/benskia/PokeDex/internal/dex"
 )
 
 type Config struct {
@@ -22,7 +23,7 @@ func NewConfig() Config {
 type CliCommand struct {
 	Name        string
 	Description string
-	Callback    func(*Config, *cache.Cache, string) error
+	Callback    func(*Config, *cache.Cache, string, *dex.Pokedex) error
 }
 
 func GetCommands() map[string]CliCommand {

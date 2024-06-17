@@ -5,9 +5,10 @@ import (
 
 	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
+	"github.com/benskia/PokeDex/internal/dex"
 )
 
-func commandMapb(config *Config, cache *cache.Cache, _ string) error {
+func commandMapb(config *Config, cache *cache.Cache, _ string, _ *dex.Pokedex) error {
 	if config.Prev == nil {
 		fmt.Println("Already at the first page of locations.")
 		return nil

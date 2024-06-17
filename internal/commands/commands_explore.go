@@ -5,9 +5,10 @@ import (
 
 	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
+	"github.com/benskia/PokeDex/internal/dex"
 )
 
-func commandExplore(_ *Config, cache *cache.Cache, area string) error {
+func commandExplore(_ *Config, cache *cache.Cache, area string, _ *dex.Pokedex) error {
 	if area == "" {
 		fmt.Println("Need an area name to explore (explore canalave-city-area).")
 		return nil
