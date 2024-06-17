@@ -39,7 +39,12 @@ func StartRepl() {
 			continue
 		}
 
-		err := cmd.Callback(&config, cache)
+		area := ""
+		if len(cleanedInput) > 1 {
+			area = cleanedInput[1]
+		}
+
+		err := cmd.Callback(&config, cache, area)
 		if err != nil {
 			fmt.Printf("Error executing command %v : %v", cmd.Name, err)
 		}
