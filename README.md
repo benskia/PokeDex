@@ -4,7 +4,7 @@ A CLI project for exploring Pokemon locations, capturing monsters, and inspectin
 
 ## How to Install
 
-Optional: With Go installed, ```go build``` within './cmd/pokedex/' (the repo already contains a recent copy of the executable).
+With Go installed, either ```go build``` within './cmd/pokedex/' or ```go build -o bin/pokedex cmd/pokedex/main.go``` from within the projects root directory.
 
 Place and run the 'pokedex' executable (also within './cmd/pokedex/') wherever you like.
 
