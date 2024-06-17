@@ -12,7 +12,6 @@ func commandMapb(config *Config, cache *cache.Cache, area string) error {
 		fmt.Println("Already at the first page of locations.")
 		return nil
 	}
-	fmt.Println("Querying previous list of locations...")
 	locations, err := api.RequestLocationAreas(config.Prev, cache)
 	if err != nil {
 		fmt.Println(err)

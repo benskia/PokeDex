@@ -14,8 +14,6 @@ func commandExplore(config *Config, cache *cache.Cache, area string) error {
 	}
 	endpoint := new(string)
 	*endpoint = api.Endpoint + "/" + area
-	fmt.Println(*endpoint)
-	fmt.Printf("Querying location-areas for %v ...\n", area)
 	locationArea, err := api.RequestAreaDetails(endpoint, cache)
 	if err != nil {
 		fmt.Println(err)

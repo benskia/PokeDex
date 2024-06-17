@@ -12,7 +12,6 @@ func commandMap(config *Config, cache *cache.Cache, area string) error {
 		fmt.Println("Already at the last page of locations.")
 		return nil
 	}
-	fmt.Println("Querying next list of locations...")
 	locations, err := api.RequestLocationAreas(config.Next, cache)
 	if err != nil {
 		fmt.Println(err)
