@@ -20,6 +20,7 @@ func commandCatch(_ *Config, cache *cache.Cache, pokemon string, pokedex *dex.Po
 		fmt.Printf("\n%v has already been captured and recorded in your Pokedex.\n\n", pokemon)
 		return nil
 	}
+	fmt.Printf("\nThrowing a Pokeball at %v...\n", pokemon)
 	endpoint := new(string)
 	*endpoint = api.PokemonSpeciesEndpoint + pokemon
 	pokemonDetails, err := api.RequestPokemonDetails(endpoint, cache)
