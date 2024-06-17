@@ -91,7 +91,7 @@ func commandMap(config *Config, cache *cache.Cache) error {
 
 	fmt.Println()
 	for _, location := range locations.Results {
-		fmt.Printf(location.Name)
+		fmt.Println(location.Name)
 	}
 	fmt.Println()
 
@@ -121,7 +121,7 @@ func commandMapb(config *Config, cache *cache.Cache) error {
 
 	fmt.Println()
 	for _, location := range locations.Results {
-		fmt.Printf(location.Name)
+		fmt.Println(location.Name)
 	}
 	fmt.Println()
 
