@@ -14,7 +14,6 @@ func commandMapb(config *Config, cache *cache.Cache, _ string) error {
 	}
 	locations, err := api.RequestLocationAreas(config.Prev, cache)
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 	config.Next = locations.Next

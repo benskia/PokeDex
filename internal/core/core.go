@@ -46,7 +46,7 @@ func StartRepl() {
 
 		err := cmd.Callback(&config, cache, area)
 		if err != nil {
-			fmt.Printf("Error executing command %v\n", cmd.Name)
+			fmt.Printf("Error executing command %v: %v\n", cmd.Name, err)
 		}
 	}
 }

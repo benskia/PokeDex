@@ -13,10 +13,9 @@ func commandExplore(_ *Config, cache *cache.Cache, area string) error {
 		return nil
 	}
 	endpoint := new(string)
-	*endpoint = api.LocationAreaEndpoint + "/" + area
-	locationArea, err := api.RequestAreaDetails(endpoint, cache)
+	*endpoint = api.LocationAreaEndpoint + area
+	locationArea, err := api.FetchJSON(endpoint, cache)
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 	if len(locationArea.PokemonEncounters) == 0 {
