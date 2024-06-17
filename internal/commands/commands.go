@@ -81,7 +81,6 @@ func commandMap(config *Config, cache *cache.Cache) error {
 		return err
 	}
 
-	fmt.Println("Caching Next and Prev endpoints...")
 	config.Next = locations.Next
 	config.Prev = locations.Prev
 
@@ -89,9 +88,13 @@ func commandMap(config *Config, cache *cache.Cache) error {
 		fmt.Println("No location data received.")
 		return nil
 	}
+
+	fmt.Println()
 	for _, location := range locations.Results {
 		fmt.Printf("Name: %v\t\tURL: %v\n", location.Name, location.URL)
 	}
+	fmt.Println()
+
 	return nil
 }
 
@@ -108,7 +111,6 @@ func commandMapb(config *Config, cache *cache.Cache) error {
 		return err
 	}
 
-	fmt.Println("Caching Next and Prev endpoints...")
 	config.Next = locations.Next
 	config.Prev = locations.Prev
 
@@ -116,8 +118,12 @@ func commandMapb(config *Config, cache *cache.Cache) error {
 		fmt.Println("No location data received.")
 		return nil
 	}
+
+	fmt.Println()
 	for _, location := range locations.Results {
 		fmt.Printf("Name: %v\t\tURL: %v\n", location.Name, location.URL)
 	}
+	fmt.Println()
+
 	return nil
 }

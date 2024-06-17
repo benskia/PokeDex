@@ -58,9 +58,11 @@ func RequestLocationAreas(url *string, c *cache.Cache) (*LocationAreaResponse, e
 func getByteData(key string, c *cache.Cache) ([]byte, error) {
 	entry, ok := c.Get(key)
 	if ok {
+		fmt.Println("Using cached results...")
 		return entry, nil
 	}
 
+	fmt.Println("Getting results from PokeAPI...")
 	client := NewClient()
 	response, err := client.httpClient.Get(key)
 	if err != nil {
