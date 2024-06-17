@@ -15,7 +15,7 @@ type Config struct {
 
 func NewConfig() Config {
 	next := new(string)
-	*next = "https://pokeapi.co/api/v2/location-area"
+	*next = "https://pokeapi.co/api/v2/location-area?offset=0&limit=20"
 	return Config{
 		Next: next,
 		Prev: nil,
@@ -91,7 +91,7 @@ func commandMap(config *Config, cache *cache.Cache) error {
 
 	fmt.Println()
 	for _, location := range locations.Results {
-		fmt.Printf("Name: %v\t\t\t\tURL: %v\n", location.Name, location.URL)
+		fmt.Printf(location.Name)
 	}
 	fmt.Println()
 
@@ -121,7 +121,7 @@ func commandMapb(config *Config, cache *cache.Cache) error {
 
 	fmt.Println()
 	for _, location := range locations.Results {
-		fmt.Printf("Name: %v\t\t\t\tURL: %v\n", location.Name, location.URL)
+		fmt.Printf(location.Name)
 	}
 	fmt.Println()
 
