@@ -8,7 +8,7 @@ import (
 	"github.com/benskia/PokeDex/internal/cache"
 )
 
-const MaxCatchRate int = 255
+const maxCatchRate int = 255
 
 func commandCatch(_ *Config, cache *cache.Cache, pokemon string) error {
 	if pokemon == "" {
@@ -21,7 +21,10 @@ func commandCatch(_ *Config, cache *cache.Cache, pokemon string) error {
 	if err != nil {
 		return err
 	}
-	captureRate := pokemonDetails.CaptureRate
-	rand.
+	if rand.Intn(maxCatchRate) <= pokemonDetails.CaptureRate {
+		fmt.Println("Captured!")
+	} else {
+		fmt.Println("Failed capture!")
+	}
 	return nil
 }

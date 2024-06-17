@@ -14,7 +14,7 @@ func commandExplore(_ *Config, cache *cache.Cache, area string) error {
 	}
 	endpoint := new(string)
 	*endpoint = api.LocationAreaEndpoint + area
-	locationArea, err := api.FetchJSON(endpoint, cache)
+	locationArea, err := api.RequestAreaDetails(endpoint, cache)
 	if err != nil {
 		return err
 	}
