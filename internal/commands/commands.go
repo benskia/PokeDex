@@ -25,7 +25,7 @@ func NewConfig() Config {
 type CliCommand struct {
 	Name        string
 	Description string
-	Callback    func(*Config, *cache.Cache) error
+	Callback    func(*Config, *cache.Cache, string) error
 }
 
 func GetCommands() map[string]CliCommand {
@@ -50,10 +50,15 @@ func GetCommands() map[string]CliCommand {
 			Description: "Display the previous 20 Pokemon locations.",
 			Callback:    commandMapb,
 		},
+		"explore": {
+			Name:        "explore",
+			Description: "Display which Pokemon can be found at a location.",
+			Callback:    commandExplore,
+		},
 	}
 }
 
-func commandHelp(config *Config, cache *cache.Cache) error {
+func commandHelp(config *Config, cache *cache.Cache, area string) error {
 	fmt.Print("\nAvailable commands:\n\n")
 	for _, cmd := range GetCommands() {
 		fmt.Printf(" - Name: %v\n", cmd.Name)
@@ -63,13 +68,13 @@ func commandHelp(config *Config, cache *cache.Cache) error {
 	return nil
 }
 
-func commandExit(config *Config, cache *cache.Cache) error {
+func commandExit(config *Config, cache *cache.Cache, area string) error {
 	fmt.Println("Shutting down PokeDex...")
 	os.Exit(0)
 	return nil
 }
 
-func commandMap(config *Config, cache *cache.Cache) error {
+func commandMap(config *Config, cache *cache.Cache, area string) error {
 	if config.Next == nil {
 		fmt.Println("Already at the last page of locations.")
 		return nil
@@ -98,7 +103,7 @@ func commandMap(config *Config, cache *cache.Cache) error {
 	return nil
 }
 
-func commandMapb(config *Config, cache *cache.Cache) error {
+func commandMapb(config *Config, cache *cache.Cache, area string) error {
 	if config.Prev == nil {
 		fmt.Println("Already at the first page of locations.")
 		return nil
@@ -113,6 +118,31 @@ func commandMapb(config *Config, cache *cache.Cache) error {
 
 	config.Next = locations.Next
 	config.Prev = locations.Prev
+
+	if len(locations.Results) == 0 {
+		fmt.Println("No location data received.")
+		return nil
+	}
+
+	fmt.Println()
+	for _, location := range locations.Results {
+		fmt.Println(location.Name)
+	}
+	fmt.Println()
+
+	return nil
+}
+
+func commandExplore(config *Config, cache *cache.Cache, area string) error {
+	endpoint := new(string)
+	*endpoint = api.Endpoint + "/location-area/" + area
+
+	fmt.Printf("Querying location-areas for %v", area)
+	locations, err := api.RequestLocationAreas(endpoint, cache)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
 
 	if len(locations.Results) == 0 {
 		fmt.Println("No location data received.")

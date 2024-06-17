@@ -11,7 +11,7 @@ import (
 	"github.com/benskia/PokeDex/internal/cache"
 )
 
-const endpoint string = "https://pokeapi.co/api/v2"
+const Endpoint string = "https://pokeapi.co/api/v2"
 
 type Client struct {
 	httpClient http.Client
