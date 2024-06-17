@@ -30,12 +30,12 @@ func GetCommands() map[string]CliCommand {
 	return map[string]CliCommand{
 		"help": {
 			Name:        "help",
-			Description: "Displays a help message",
+			Description: "Display a list of available commands.",
 			Callback:    commandHelp,
 		},
 		"exit": {
 			Name:        "exit",
-			Description: "Exit the Pokedex",
+			Description: "Exit the Pokedex CLI.",
 			Callback:    commandExit,
 		},
 		"map": {

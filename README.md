@@ -1,12 +1,142 @@
 # PokeDex
 
-A CLI tool for querying PokeAPI for info.
+A CLI project for exploring Pokemon locations, capturing monsters, and inspecting their stats.
 
-## Current Task
+## How to Install
 
-* map command - Progresses API calls by tracking and using 'next' endpoint from the API response.
-* mapb command - Similar but in reverse, using the 'previous' endpoint.
+Optional: With Go installed, ```go build``` within './cmd/pokedex/' (the repo already contains a recent copy of the executable).
 
-## Recently Completed
+Place and run the 'pokedex' executable (also within './cmd/pokedex/') wherever you like.
 
-* Restructure project tree - separating functionality into different packages.
+## Commands
+
+* help           : Displays a list of available commands.
+```
+❯ cd cmd/pokedex
+❯ go build && ./pokedex
+
+Welcome to the PokeDex!
+
+PokeDex > help
+
+Available commands:
+
+ - Name: explore
+ - Description: Display which Pokemon can be found at a location.
+
+ - Name: catch
+ - Description: Attempt to catch a Pokemon, by name.
+
+ - Name: inspect
+ - Description: Display a Pokemon's details, by name.
+
+ - Name: pokedex
+ - Description: Display the names of all the Pokemon you've caught.
+
+ - Name: help
+ - Description: Display a list of available commands.
+
+ - Name: exit
+ - Description: Exit the Pokedex CLI.
+
+ - Name: map
+ - Description: Display the next 20 Pokemon locations.
+
+ - Name: mapb
+ - Description: Display the previous 20 Pokemon locations.
+
+PokeDex >
+```
+* exit           : Ends the program.
+```
+PokeDex > exit
+Shutting down PokeDex...
+```
+* map            : Displays the next 20 locations.
+* mapb           : Displays the previous 20 locations.
+```
+PokeDex >  map
+
+canalave-city-area
+eterna-city-area
+pastoria-city-area
+sunyshore-city-area
+sinnoh-pokemon-league-area
+oreburgh-mine-1f
+oreburgh-mine-b1f
+valley-windworks-area
+eterna-forest-area
+fuego-ironworks-area
+mt-coronet-1f-route-207
+mt-coronet-2f
+mt-coronet-3f
+mt-coronet-exterior-snowfall
+mt-coronet-exterior-blizzard
+mt-coronet-4f
+mt-coronet-4f-small-room
+mt-coronet-5f
+mt-coronet-6f
+mt-coronet-1f-from-exterior
+
+PokeDex >
+```
+* explore <area> : Displays the Pokemon that can be encountered at <area>.
+```
+
+PokeDex > explore canalave-city-area
+
+tentacool
+tentacruel
+staryu
+magikarp
+gyarados
+wingull
+pelipper
+shellos
+gastrodon
+finneon
+lumineon
+
+PokeDex >
+```
+* catch <name>   : Attempts to catch the Pokemon, by <name>.
+```
+PokeDex > catch tentacool
+
+Throwing a Pokeball at tentacool...
+
+Failed to capture tentacool!
+
+PokeDex >
+```
+* inspect <name> : Displays details about the Pokemon, by <name>.
+```
+PokeDex > inspect rattata
+
+Name:  rattata
+Height:  3 decimeters
+Weight:  35 hectograms
+Stats:
+  -hp:  30
+  -attack:  56
+  -defense:  35
+  -special-attack:  25
+  -special-defense:  35
+  -speed:  72
+Types:
+  - normal
+
+PokeDex >
+```
+* pokedex        : Displays a list of all Pokemon caught so far.
+```
+PokeDex > pokedex
+
+Your Pokedex:
+  - rattata
+  - tentacool
+  - noctowl
+  - wooper
+
+PokeDex >
+```
