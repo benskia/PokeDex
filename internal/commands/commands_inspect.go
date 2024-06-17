@@ -17,8 +17,6 @@ func commandInspect(_ *Config, _ *cache.Cache, pokemon string, pokedex *dex.Poke
 		fmt.Printf("\n%v hasn't been caught and recorded in your Pokedex yet.\n\n", pokemon)
 		return nil
 	}
-	fmt.Println()
-	fmt.Printf("\nName: %v\n", p.Name)
-	fmt.Println()
+	p.PrintDetails()
 	return nil
 }

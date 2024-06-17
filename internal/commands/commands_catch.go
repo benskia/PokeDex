@@ -23,13 +23,15 @@ func commandCatch(_ *Config, cache *cache.Cache, pokemon string, pokedex *dex.Po
 	fmt.Printf("\nThrowing a Pokeball at %v...\n", pokemon)
 	endpoint := new(string)
 	*endpoint = api.PokemonSpeciesEndpoint + pokemon
-	pokemonDetails, err := api.RequestPokemonDetails(endpoint, cache)
+	pd, err := api.RequestPokemonDetails(endpoint, cache)
 	if err != nil {
 		return err
 	}
-	if rand.Intn(maxCatchRate) <= pokemonDetails.CaptureRate {
+	if rand.Intn(maxCatchRate) <= pd.CaptureRate {
 		fmt.Printf("\nCaptured %v!\n\n", pokemon)
-		pokedex.Dex[pokemon] = dex.Pokemon{Name: pokemonDetails.Name}
+		pokedex.Dex[pokemon] = dex.Pokemon{
+			Name: pd.Name,
+		}
 	} else {
 		fmt.Printf("\nFailed to capture %v!\n\n", pokemon)
 	}
