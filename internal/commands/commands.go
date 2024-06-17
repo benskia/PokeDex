@@ -1,9 +1,6 @@
 package commands
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
 )
