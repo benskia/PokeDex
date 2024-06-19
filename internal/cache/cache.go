@@ -47,7 +47,7 @@ func (c *Cache) Get(key string) ([]byte, bool) {
 func (c *Cache) reapLoop() {
 	ticker := time.NewTicker(c.interval)
 	defer ticker.Stop()
-	for range ticker.C {
+	for {
 		c.mu.Lock()
 		for key, entry := range c.entries {
 			timeSinceEntryCreated := time.Now().Sub(entry.createdAt)
