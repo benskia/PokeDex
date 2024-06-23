@@ -2,14 +2,19 @@ package commands
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
-func commandMap(config *Config, _ string) error {
+func commandMap(config *Config, extra string) error {
 	if config.Next == nil {
 		fmt.Println("Already at the last page of locations.")
 		return nil
+	}
+	if extra == "report" {
+		start := time.Now()
+		defer reportTimeDelta(start)
 	}
 	locations, err := pokeapi.RequestLocationAreas(config.Next, config.Cache)
 	if err != nil {

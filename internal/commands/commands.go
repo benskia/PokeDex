@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/benskia/PokeDex/internal/cache"
@@ -77,4 +78,10 @@ func GetCommands() map[string]CliCommand {
 			Callback:    commandPokedex,
 		},
 	}
+}
+
+func reportTimeDelta(start time.Time) {
+	finish := time.Now()
+	duration := finish.Sub(start)
+	fmt.Println("Time to execute: ", duration)
 }
