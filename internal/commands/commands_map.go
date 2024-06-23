@@ -12,7 +12,6 @@ func commandMap(config *Config, args ...string) error {
 		fmt.Println("Already at the last page of locations.")
 		return nil
 	}
-	fmt.Println(args)
 	if len(args) > 0 && args[0] == "report" {
 		start := time.Now()
 		defer reportTimeDelta(start)
