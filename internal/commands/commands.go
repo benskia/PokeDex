@@ -1,29 +1,37 @@
 package commands
 
 import (
+	"time"
+
 	"github.com/benskia/PokeDex/internal/cache"
 	"github.com/benskia/PokeDex/internal/dex"
 	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
 type Config struct {
-	Next *string
-	Prev *string
+	Next    *string
+	Prev    *string
+	Cache   *cache.Cache
+	Pokedex *dex.Pokedex
 }
 
 func NewConfig() Config {
 	next := new(string)
 	*next = pokeapi.LocationAreaEndpoint + "?offset=0&limit=20"
+	cache := cache.NewCache(time.Minute * 7)
+	pokedex := dex.NewPokedex()
 	return Config{
-		Next: next,
-		Prev: nil,
+		Next:    next,
+		Prev:    nil,
+		Cache:   cache,
+		Pokedex: pokedex,
 	}
 }
 
 type CliCommand struct {
 	Name        string
 	Description string
-	Callback    func(*Config, *cache.Cache, string, *dex.Pokedex) error
+	Callback    func(*Config, string) error
 }
 
 func GetCommands() map[string]CliCommand {

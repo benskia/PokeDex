@@ -3,19 +3,17 @@ package commands
 import (
 	"fmt"
 
-	"github.com/benskia/PokeDex/internal/cache"
-	"github.com/benskia/PokeDex/internal/dex"
 	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
-func commandExplore(_ *Config, cache *cache.Cache, area string, _ *dex.Pokedex) error {
+func commandExplore(config *Config, area string) error {
 	if area == "" {
 		fmt.Print("\nNeed an area name to explore (explore canalave-city-area).\n\n")
 		return nil
 	}
 	endpoint := new(string)
 	*endpoint = pokeapi.LocationAreaEndpoint + area
-	locationArea, err := pokeapi.RequestAreaDetails(endpoint, cache)
+	locationArea, err := pokeapi.RequestAreaDetails(endpoint, config.Cache)
 	if err != nil {
 		return err
 	}

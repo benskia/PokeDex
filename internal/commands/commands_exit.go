@@ -3,12 +3,9 @@ package commands
 import (
 	"fmt"
 	"os"
-
-	"github.com/benskia/PokeDex/internal/cache"
-	"github.com/benskia/PokeDex/internal/dex"
 )
 
-func commandExit(_ *Config, _ *cache.Cache, _ string, _ *dex.Pokedex) error {
+func commandExit(_ *Config, _ string) error {
 	fmt.Println("Shutting down PokeDex...")
 	os.Exit(0)
 	return nil

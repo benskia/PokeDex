@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/benskia/PokeDex/internal/cache"
 	"github.com/benskia/PokeDex/internal/dex"
 	"github.com/benskia/PokeDex/internal/pokeapi"
 )
@@ -12,19 +11,19 @@ import (
 // This is based off Rattata's base_experience of 51 and capture rate of ~100% (255 / 255)
 const maxCatchValue int = 50
 
-func commandCatch(_ *Config, cache *cache.Cache, pokemon string, pokedex *dex.Pokedex) error {
+func commandCatch(config *Config, pokemon string) error {
 	if pokemon == "" {
 		fmt.Print("\nNeed a Pokemon name to try catching it.\n\n")
 		return nil
 	}
-	if _, ok := pokedex.Dex[pokemon]; ok {
+	if _, ok := config.Pokedex.Dex[pokemon]; ok {
 		fmt.Printf("\n%v has already been captured and recorded in your Pokedex.\n\n", pokemon)
 		return nil
 	}
 	fmt.Printf("\nThrowing a Pokeball at %v...\n", pokemon)
 	endpoint := new(string)
 	*endpoint = pokeapi.PokemonEndpoint + pokemon
-	pd, err := pokeapi.RequestPokemonDetails(endpoint, cache)
+	pd, err := pokeapi.RequestPokemonDetails(endpoint, config.Cache)
 	if err != nil {
 		return err
 	}
@@ -34,7 +33,7 @@ func commandCatch(_ *Config, cache *cache.Cache, pokemon string, pokedex *dex.Po
 		for i, t := range pd.Types {
 			pokemonTypes[i] = t.Type.Name
 		}
-		pokedex.Dex[pokemon] = dex.Pokemon{
+		config.Pokedex.Dex[pokemon] = dex.Pokemon{
 			Name:   pd.Name,
 			Height: pd.Height,
 			Weight: pd.Weight,

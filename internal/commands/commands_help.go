@@ -2,12 +2,9 @@ package commands
 
 import (
 	"fmt"
-
-	"github.com/benskia/PokeDex/internal/cache"
-	"github.com/benskia/PokeDex/internal/dex"
 )
 
-func commandHelp(_ *Config, _ *cache.Cache, _ string, _ *dex.Pokedex) error {
+func commandHelp(_ *Config, _ string) error {
 	fmt.Print("\nAvailable commands:\n\n")
 	for _, cmd := range GetCommands() {
 		fmt.Printf(" - Name: %v\n", cmd.Name)
