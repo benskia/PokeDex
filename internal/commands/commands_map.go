@@ -3,9 +3,9 @@ package commands
 import (
 	"fmt"
 
-	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
 	"github.com/benskia/PokeDex/internal/dex"
+	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
 func commandMap(config *Config, cache *cache.Cache, _ string, _ *dex.Pokedex) error {
@@ -13,7 +13,7 @@ func commandMap(config *Config, cache *cache.Cache, _ string, _ *dex.Pokedex) er
 		fmt.Println("Already at the last page of locations.")
 		return nil
 	}
-	locations, err := api.RequestLocationAreas(config.Next, cache)
+	locations, err := pokeapi.RequestLocationAreas(config.Next, cache)
 	if err != nil {
 		return err
 	}

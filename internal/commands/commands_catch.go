@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
 	"github.com/benskia/PokeDex/internal/dex"
+	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
 // This is based off Rattata's base_experience of 51 and capture rate of ~100% (255 / 255)
@@ -23,8 +23,8 @@ func commandCatch(_ *Config, cache *cache.Cache, pokemon string, pokedex *dex.Po
 	}
 	fmt.Printf("\nThrowing a Pokeball at %v...\n", pokemon)
 	endpoint := new(string)
-	*endpoint = api.PokemonEndpoint + pokemon
-	pd, err := api.RequestPokemonDetails(endpoint, cache)
+	*endpoint = pokeapi.PokemonEndpoint + pokemon
+	pd, err := pokeapi.RequestPokemonDetails(endpoint, cache)
 	if err != nil {
 		return err
 	}

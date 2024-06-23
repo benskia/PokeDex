@@ -1,12 +1,67 @@
-package api
+package pokeapi
 
-import (
-	"encoding/json"
-	"errors"
-	"fmt"
+type LocationAreaResponse struct {
+	Count   int     `json:"count"`
+	Next    *string `json:"next"`
+	Prev    *string `json:"previous"`
+	Results []struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"results"`
+}
 
-	"github.com/benskia/PokeDex/internal/cache"
-)
+type LocationArea struct {
+	EncounterMethodRates []struct {
+		EncounterMethod struct {
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"encounter_method"`
+		VersionDetails []struct {
+			Rate    int `json:"rate"`
+			Version struct {
+				Name string `json:"name"`
+				URL  string `json:"url"`
+			} `json:"version"`
+		} `json:"version_details"`
+	} `json:"encounter_method_rates"`
+	GameIndex int `json:"game_index"`
+	ID        int `json:"id"`
+	Location  struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"location"`
+	Name  string `json:"name"`
+	Names []struct {
+		Language struct {
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"language"`
+		Name string `json:"name"`
+	} `json:"names"`
+	PokemonEncounters []struct {
+		Pokemon struct {
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"pokemon"`
+		VersionDetails []struct {
+			EncounterDetails []struct {
+				Chance          int   `json:"chance"`
+				ConditionValues []any `json:"condition_values"`
+				MaxLevel        int   `json:"max_level"`
+				Method          struct {
+					Name string `json:"name"`
+					URL  string `json:"url"`
+				} `json:"method"`
+				MinLevel int `json:"min_level"`
+			} `json:"encounter_details"`
+			MaxChance int `json:"max_chance"`
+			Version   struct {
+				Name string `json:"name"`
+				URL  string `json:"url"`
+			} `json:"version"`
+		} `json:"version_details"`
+	} `json:"pokemon_encounters"`
+}
 
 type PokemonDetails struct {
 	Abilities []struct {
@@ -277,21 +332,4 @@ type PokemonDetails struct {
 		} `json:"type"`
 	} `json:"types"`
 	Weight int `json:"weight"`
-}
-
-func RequestPokemonDetails(url *string, c *cache.Cache) (*PokemonDetails, error) {
-	if url == nil {
-		return nil, errors.New("Tried to query with a null endpoint value.")
-	}
-	body, err := getByteData(*url, c)
-	if err != nil {
-		return nil, err
-	}
-	pokemon := PokemonDetails{}
-	err = json.Unmarshal(body, &pokemon)
-	if err != nil {
-		fmt.Println("Error unmarshalling JSON to Struct.")
-		return nil, err
-	}
-	return &pokemon, nil
 }

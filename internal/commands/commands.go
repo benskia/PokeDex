@@ -1,9 +1,9 @@
 package commands
 
 import (
-	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
 	"github.com/benskia/PokeDex/internal/dex"
+	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
 type Config struct {
@@ -13,7 +13,7 @@ type Config struct {
 
 func NewConfig() Config {
 	next := new(string)
-	*next = api.LocationAreaEndpoint + "?offset=0&limit=20"
+	*next = pokeapi.LocationAreaEndpoint + "?offset=0&limit=20"
 	return Config{
 		Next: next,
 		Prev: nil,

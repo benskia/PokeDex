@@ -3,9 +3,9 @@ package commands
 import (
 	"fmt"
 
-	"github.com/benskia/PokeDex/internal/api"
 	"github.com/benskia/PokeDex/internal/cache"
 	"github.com/benskia/PokeDex/internal/dex"
+	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
 func commandExplore(_ *Config, cache *cache.Cache, area string, _ *dex.Pokedex) error {
@@ -14,8 +14,8 @@ func commandExplore(_ *Config, cache *cache.Cache, area string, _ *dex.Pokedex) 
 		return nil
 	}
 	endpoint := new(string)
-	*endpoint = api.LocationAreaEndpoint + area
-	locationArea, err := api.RequestAreaDetails(endpoint, cache)
+	*endpoint = pokeapi.LocationAreaEndpoint + area
+	locationArea, err := pokeapi.RequestAreaDetails(endpoint, cache)
 	if err != nil {
 		return err
 	}
