@@ -36,12 +36,7 @@ func StartRepl() {
 			continue
 		}
 
-		arg := ""
-		if len(cleanedInput) > 1 {
-			arg = cleanedInput[1]
-		}
-
-		err := cmd.Callback(&config, arg)
+		err := cmd.Callback(&config, cleanedInput[1:]...)
 		if err != nil {
 			fmt.Printf("Error executing command %v: %v\n", cmd.Name, err)
 		}

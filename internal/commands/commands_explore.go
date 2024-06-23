@@ -2,15 +2,21 @@ package commands
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
-func commandExplore(config *Config, area string) error {
-	if area == "" {
+func commandExplore(config *Config, args ...string) error {
+	if len(args) < 1 {
 		fmt.Print("\nNeed an area name to explore (explore canalave-city-area).\n\n")
 		return nil
 	}
+	if len(args) > 1 && args[1] == "report" {
+		start := time.Now()
+		defer reportTimeDelta(start)
+	}
+	area := args[0]
 	endpoint := new(string)
 	*endpoint = pokeapi.LocationAreaEndpoint + area
 	locationArea, err := pokeapi.RequestAreaDetails(endpoint, config.Cache)

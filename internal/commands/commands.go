@@ -32,7 +32,7 @@ func NewConfig() Config {
 type CliCommand struct {
 	Name        string
 	Description string
-	Callback    func(*Config, string) error
+	Callback    func(config *Config, args ...string) error
 }
 
 func GetCommands() map[string]CliCommand {

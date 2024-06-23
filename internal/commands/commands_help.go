@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandHelp(_ *Config, _ string) error {
+func commandHelp(config *Config, args ...string) error {
 	fmt.Print("\nAvailable commands:\n\n")
 	for _, cmd := range GetCommands() {
 		fmt.Printf(" - Name: %v\n", cmd.Name)

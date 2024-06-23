@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"math/rand"
+	"time"
 
 	"github.com/benskia/PokeDex/internal/dex"
 	"github.com/benskia/PokeDex/internal/pokeapi"
@@ -11,11 +12,16 @@ import (
 // This is based off Rattata's base_experience of 51 and capture rate of ~100% (255 / 255)
 const maxCatchValue int = 50
 
-func commandCatch(config *Config, pokemon string) error {
-	if pokemon == "" {
+func commandCatch(config *Config, args ...string) error {
+	if len(args) < 1 {
 		fmt.Print("\nNeed a Pokemon name to try catching it.\n\n")
 		return nil
 	}
+	if len(args) > 1 && args[1] == "report" {
+		start := time.Now()
+		defer reportTimeDelta(start)
+	}
+	pokemon := args[0]
 	if _, ok := config.Pokedex.Dex[pokemon]; ok {
 		fmt.Printf("\n%v has already been captured and recorded in your Pokedex.\n\n", pokemon)
 		return nil

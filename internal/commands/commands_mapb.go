@@ -7,12 +7,12 @@ import (
 	"github.com/benskia/PokeDex/internal/pokeapi"
 )
 
-func commandMapb(config *Config, extra string) error {
+func commandMapb(config *Config, args ...string) error {
 	if config.Prev == nil {
 		fmt.Println("Already at the first page of locations.")
 		return nil
 	}
-	if extra == "report" {
+	if len(args) > 0 && args[0] == "report" {
 		start := time.Now()
 		defer reportTimeDelta(start)
 	}
